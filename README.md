@@ -1,6 +1,6 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Use the up, down, left and right arrow keys to move the player.
 
-for self-checking their submission.
+Be careful! Don't get hit by the bugs, or you will have to start over. 
