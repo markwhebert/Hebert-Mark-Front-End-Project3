@@ -10,7 +10,7 @@ var Enemy = function(row) {
     // sets the starting location of the enemy
     this.x = -101;
     this.y = row * 83 - 20;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -25,12 +25,12 @@ Enemy.prototype.update = function(dt) {
         allEnemies.shift();
         allEnemies.push(new Enemy(Math.floor(Math.random() * 4 + 1)));
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
 // Now write your own player class
@@ -43,9 +43,9 @@ var Player = function() {
     //player starting location
     this.x = 202;
     this.y = 406;
-}
+};
 
-// Keeps the player in-bounds
+// Keeps the player in-bounds and keeps tack and displays scoring
 Player.prototype.update = function() {
     if (this.x < 0) {
         this.x = 0;
@@ -53,15 +53,23 @@ Player.prototype.update = function() {
         this.x = 404;
     } else if (this.y > 406) {
         this.y = 406;
-    } else if (this.y < -9) {
-        this.y = -9;
+    } else if (this.y < 73) {
+        // increments the score if the player reaches water
+        score += 1;
+
+        // sends the player back to the starting point
+        this.x = 202;
+        this.y = 406;
+
+        // replaces the old score with the new
+        document.getElementById("scoreDisplay").innerHTML = score;
     }
-}
+};
 
 // render the image of the player in the correct position
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(motion) {
     if (motion === 'left') {
@@ -73,7 +81,7 @@ Player.prototype.handleInput = function(motion) {
     } else if (motion === 'down') {
         this.y += 83;
     }
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -82,6 +90,9 @@ Player.prototype.handleInput = function(motion) {
 var allEnemies = [new Enemy(Math.floor(Math.random() * 4 + 1))];
 var player = new Player();
 var speed = 50;
+
+// Sets the score and displays it on the web page
+var score = 0;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

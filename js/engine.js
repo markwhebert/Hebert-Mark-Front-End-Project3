@@ -57,7 +57,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    };
+    }
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -169,8 +169,12 @@ var Engine = (function(global) {
     // Resets the game to the beginning if the player is hit
     function reset() {
         allEnemies = [new Enemy(Math.floor(Math.random() * 4 + 1))];
-        player = new Player;
+        player = new Player();
         speed = 50;
+
+        // Reset the score to 0 and redisplay it
+        score = 0;
+        document.getElementById("scoreDisplay").innerHTML = score;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
